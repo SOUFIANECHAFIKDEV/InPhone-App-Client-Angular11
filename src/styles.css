@@ -1,0 +1,44 @@
+/* You can add global styles to this file, and also import other style files */
+
+
+body{
+    background-color: #F2F2F2 !important;
+}
+
+.bg-light {
+    background-color: #ffffff!important;
+}
+
+nav {
+    height: 70px;
+}
+
+.breadcrumb {
+    background-color: transparent;
+}
+
+.breadcrumb-item > a {
+    color: #000000;
+    font-weight: 500;
+}
+
+.breadcrumb-nav{
+    border-bottom: 1px #e7e7e7 solid;
+}
+
+.error-msg{
+    color: red;
+    font-size: small;
+    padding: 0.1rem 0.1rem 0.1rem 0.5rem;
+}
+
+
+.carousel-inner {
+    background: #cbcbcb !important;
+    padding: 10px 20px;
+    width: 90%;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}

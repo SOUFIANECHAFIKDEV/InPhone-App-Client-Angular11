@@ -1,0 +1,14 @@
+.section-1{
+    background: #fff;
+}
+
+.btn-add{
+    margin: 1rem 1rem;
+    float: right;
+}
+
+.no-data-to-display{
+    text-align: center;
+    color: #cbcbcb;
+    font-weight: 600;
+}

@@ -1,0 +1,44 @@
+<nz-form-item>
+        <div class="form-control-wrapper">
+            <nz-form-control 
+            nzHasFeedback 
+            [nzValidateStatus]="(ngControl.touched && ngControl.errors) ? 'error':''">
+            
+            <input 
+                nz-input
+                type="{{type}}" 
+                placeholder="{{label}}" 
+                [formControl]="ngControl.control"
+                [disabled]="disabled" />
+
+            </nz-form-control>
+        </div>
+
+            <!-- validation message for required condition -->
+        <div 
+            *ngIf="ngControl?.control?.touched && ngControl?.control?.errors?.required"
+            class="ant-form-item-explain ant-form-item-explain-error">
+            {{ 'errors.VEntrer' | translate }} {{ validationLabel }}
+        </div>
+
+            <!-- validation message for min length condition -->
+        <div 
+            *ngIf="ngControl?.control?.touched && ngControl?.control?.errors?.minlength"
+            class="ant-form-item-explain ant-form-item-explain-error">
+            {{ label }} doit contenir au moins {{ ngControl.control.errors.minlength['requiredLength'] }} caractères
+        </div>
+
+            <!-- validation message for max length condition -->
+        <div 
+            *ngIf="ngControl?.control?.touched && ngControl?.control?.errors?.maxlength"
+            class="ant-form-item-explain ant-form-item-explain-error">
+            {{ label }} doit contenir au plus {{ ngControl.control.errors.maxlength['requiredLength'] }} caractères
+        </div>
+
+            <!-- validation message for email -->
+        <div 
+            *ngIf="ngControl?.control?.errors?.pattern"
+            class="ant-form-item-explain ant-form-item-explain-error">
+                Veuillez fournir {{ validationLabel }} valide
+        </div>
+</nz-form-item>

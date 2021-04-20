@@ -1,0 +1,102 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <h4 id="dialog-sizes-name2" class="modal-title pull-left">{{ title }}</h4>
+        <button type="button" class="close pull-right" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="container">
+            <form nz-form [formGroup]="buttonForm">
+                <div class="row">
+
+                    <div class="col-sm-12 mt-2">
+                        <label for="label" class="form-label">Label</label>
+                        <input class="form-control" formControlName="label" type="text" placeholder="button label">
+                        <p class="error-msg"
+                            *ngIf="buttonForm?.controls['label']?.touched && buttonForm?.controls['label']?.errors?.required">
+                            Please enter the Label
+                        </p>
+                    </div>
+
+                    <div class="col-sm-12 mt-2">
+                        <label for="description" class="form-label">Description</label>
+                        <input class="form-control" formControlName="description" type="text"
+                            placeholder="button description">
+                        <p class="error-msg"
+                            *ngIf="buttonForm?.controls['description']?.touched && buttonForm?.controls['description']?.errors?.required">
+                            Please enter the description
+                        </p>
+                    </div>
+
+                    <div class="col-sm-12 mt-2">
+                        <label for="type" class="form-label">Type</label>
+                        <select class="form-control" formControlName="type">
+                            <option *ngFor="let buttonType of buttonTypes" [value]="buttonType.idTypeButton">
+                                {{buttonType.label}}</option>
+                        </select>
+
+                        <p class="error-msg"
+                            *ngIf="buttonForm?.controls['type']?.touched && buttonForm?.controls['type']?.errors?.required">
+                            Please select the type
+                        </p>
+                    </div>
+
+                    <div class="col-sm-12 mt-2" *ngIf="buttonForm?.get('type')?.value == typeButtonEnum.Call">
+                        <label for="content" class="form-label">Phone Number</label>
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1">+</span>
+                            <input class="form-control" formControlName="content" type="text"
+                                placeholder="Enter a phone Number">
+                        </div>
+                        <p class="error-msg"
+                            *ngIf="buttonForm?.controls['content']?.touched && buttonForm?.controls['content']?.errors?.required">
+                            Please enter the content
+                        </p>
+                    </div>
+
+                    <div class="col-sm-12 mt-2" *ngIf="buttonForm?.get('type')?.value== typeButtonEnum.SendEmail">
+                        <label for="content" class="form-label">Email</label>
+                        <div class="input-group">
+                            <input class="form-control" formControlName="content" type="text"
+                                placeholder="Entre an email">
+                        </div>
+                        <p class="error-msg"
+                            *ngIf="buttonForm?.controls['content']?.touched && buttonForm?.controls['content']?.errors?.required">
+                            Please enter the content
+                        </p>
+                    </div>
+
+                    <div class="col-sm-12 mt-2" *ngIf="buttonForm?.get('type')?.value == typeButtonEnum.Text">
+                        <label for="content" class="form-label">Phone Number</label>
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1">+</span>
+                            <input class="form-control" formControlName="content" type="text"
+                                placeholder="button content">
+                        </div>
+                        <p class="error-msg"
+                            *ngIf="buttonForm?.controls['content']?.touched && buttonForm?.controls['content']?.errors?.required">
+                            Please enter the content
+                        </p>
+                    </div>
+
+                    <div class="col-sm-12 mt-2" *ngIf="buttonForm?.get('type')?.value == typeButtonEnum.WebLink">
+                        <label for="content" class="form-label">Link</label>
+                        <input class="form-control" formControlName="content" type="text" placeholder="button content">
+                        <p class="error-msg"
+                            *ngIf="buttonForm?.controls['content']?.touched && buttonForm?.controls['content']?.errors?.required">
+                            Please enter the content
+                        </p>
+                    </div>
+
+                    <button type="button" style="margin: 1rem 0.5rem 0px 1rem;" class="btn btn-default"
+                        (click)="close()">Back</button>
+                    <button type="button" style="margin: 1rem 1rem 0px 0.5rem;" class="btn btn-primary"
+                        (click)="save()">Save</button>
+
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

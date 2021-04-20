@@ -1,0 +1,16 @@
+.btn-dark{
+    margin: 1rem 0;
+}
+
+td {
+    text-align: center;
+}
+
+a {
+    text-decoration: none;
+    color: #ffffff;
+}
+button.btn.btn-dark {
+    height: 5rem;
+    width: 10rem;
+}

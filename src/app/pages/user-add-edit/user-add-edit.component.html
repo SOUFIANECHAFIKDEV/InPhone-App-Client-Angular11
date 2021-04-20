@@ -1,0 +1,165 @@
+<div class="container">
+    <div class="my-3 p-3 bg-body rounded shadow-sm section-1">
+
+        <nav class="breadcrumb-nav" style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;);"
+            aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a [routerLink]="'/users/list'">Users</a></li>
+                <li class="breadcrumb-item active" aria-current="page">setup new User</li>
+            </ol>
+        </nav>
+
+        <h3 class="mb-5 mt-3">Setup a new User</h3>
+
+        <form nz-form [formGroup]="setupForm">
+            <h6 class="border-bottom pb-2 mb-0">User Informations</h6>
+
+            <div class="row mb-3 mt-3">
+                <div class="col-sm-6">
+                    <label for="firstName" class="form-label">First Name</label>
+
+                    <input type="text" class="form-control" id="firstName" placeholder="User first name"
+                        formControlName="firstName">
+
+                    <p class="error-msg"
+                        *ngIf="setupForm?.controls['firstName']?.touched && setupForm?.controls['firstName']?.errors?.required">
+                        Please enter the user first name
+                    </p>
+                </div>
+
+                <div class="col-sm-6">
+                    <label for="lastName" class="form-label">Last Name</label>
+
+                    <input type="email" class="form-control" id="lastName" placeholder="User last name"
+                        formControlName="lastName">
+
+                    <p class="error-msg"
+                        *ngIf="setupForm?.controls['lastName']?.touched && setupForm?.controls['lastName']?.errors?.required">
+                        Please enter the user last name
+                    </p>
+                </div>
+            </div>
+            <div class="row mb-3 mt-3">
+                <div class="col-sm-6">
+                    <label for="companyName" class="form-label">Company Name</label>
+
+                    <input type="email" class="form-control" id="companyName" placeholder="User company name"
+                        formControlName="companyName">
+
+                    <p class="error-msg"
+                        *ngIf="setupForm?.controls['companyName']?.touched && setupForm?.controls['companyName']?.errors?.required">
+                        Please enter the user company name
+                    </p>
+                </div>
+
+                <div class="col-sm-6">
+                    <label for="phone" class="form-label">Phone</label>
+
+                    <input type="email" class="form-control" id="phone" placeholder="User phone"
+                        formControlName="phone">
+
+                    <p class="error-msg" *ngIf="setupForm?.controls['phone']?.touched && setupForm?.controls['phone']?.errors?.required">
+                        Please enter the phone
+                    </p>
+                </div>
+            </div>
+            <div class="row mb-3 mt-3">
+                <div class="col-sm-6">
+                    <label for="email" class="form-label">Email</label>
+
+                    <input type="email" class="form-control" id="email" placeholder="User email"
+                        formControlName="email">
+
+                    <p class="error-msg" *ngIf="setupForm?.controls['email']?.touched && setupForm?.controls['email']?.errors?.required">
+                        Please enter the email
+                    </p>
+                </div>
+            </div>
+
+            <h6 class="border-bottom pb-2 mb-0">Logos</h6>
+
+            <div class="row mb-3 mt-3">
+                <div class="col-sm-6">
+                    <label for="logo1" class="form-label">Logo 1</label>
+                    <div class="input-group">
+                        <input class="form-control" type="file" id="logo1"
+                            (change)="handleFileInput($event.target.files,logoEnum.Logo1)">
+                        <button type="button" class="btn btn-outline-primary btn" style="margin-left: 0.4rem;"
+                            (click)="removeLogo(logoEnum.Logo1)">Show</button>
+                        <button type="button" class="btn btn-outline-danger btn" style="margin-left: 0.4rem;"
+                            (click)="removeLogo(logoEnum.Logo1)">Remove</button>
+                    </div>
+                    
+                </div>
+                <div class="col-sm-6">
+                    <label for="logo2" class="form-label">Logo 2</label>
+                    <div class="input-group">
+                        <input class="form-control" type="file" id="logo2"
+                            (change)="handleFileInput($event.target.files,logoEnum.Logo2)">
+                        <button type="button" class="btn btn-outline-primary btn" style="margin-left: 0.4rem;"
+                            (click)="removeLogo(logoEnum.Logo2)">Show</button>
+                        <button type="button" class="btn btn-outline-danger btn" style="margin-left: 0.4rem;"
+                            (click)="removeLogo(logoEnum.Logo2)">Remove</button>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="row mb-3 mt-3">
+                <div class="col-sm-6">
+                    <label for="logo3" class="form-label">Logo 3</label>
+                    <div class="input-group">
+                        <input class="form-control" type="file" id="logo3"
+                            (change)="handleFileInput($event.target.files,logoEnum.Logo3)">
+                        <button type="button" class="btn btn-outline-primary btn" style="margin-left: 0.4rem;"
+                            (click)="removeLogo(logoEnum.Logo3)">Show</button>
+                        <button type="button" class="btn btn-outline-danger btn" style="margin-left: 0.4rem;"
+                            (click)="removeLogo(logoEnum.Logo3)">Remove</button>
+                    </div>
+                    
+                </div>
+            </div>
+
+            <h6 class="border-bottom pb-2 mb-0">Buttons</h6>
+
+            <button type="button" class="btn btn-primary btn-add" (click)="openButtonsModal()">
+                Add New Button
+            </button>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Label</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Type</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let button of buttons; let index = index">
+                        <th scope="row">{{ button.label }}</th>
+                        <td>{{ button.description }}</td>
+                        <td>{{ GetTypelable(button.type) }}</td>
+                        <td>
+                            <div class="btn-group" role="group" aria-label="Action">
+                                <button type="button" class="btn btn-outline-primary"
+                                    (click)="edit(index)">Edit</button>
+                                <button type="button" class="btn btn-outline-primary"
+                                    (click)="delete(index)">delete</button>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr *ngIf="buttons.length == 0">
+                        <td colspan="4"> 
+                            <p class="no-data-to-display">No Data to display </p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+
+        <button type="button" class="btn btn-default" style="margin: 1rem 0.5rem 0px 1rem;" (click)="back()">Back</button>
+        <button type="button" class="btn btn-primary" style="margin: 1rem 1rem 0px 0.5rem;" (click)="save()">Save</button>
+        
+    </div>
+</div>

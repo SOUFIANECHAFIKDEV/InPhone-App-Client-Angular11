@@ -1,0 +1,13 @@
+input[type="text"],
+input[type="password"] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  box-sizing: border-box;
+  border-radius: 5px;
+}
+
+.form-control-wrapper {
+  width: 100%;
+}

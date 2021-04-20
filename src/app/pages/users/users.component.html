@@ -1,0 +1,53 @@
+<div class="container">
+  <div class="my-3 p-3 bg-body rounded shadow-sm section-1">
+    <!-- <nav class="breadcrumb-nav"
+      style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;);"
+      aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item active" aria-current="page">Users</li>
+      </ol>
+    </nav> -->
+
+    <h3 class="mb-1 mt-3">Users List</h3>
+
+    <button type="button" class="btn btn-primary btn-add" [routerLink]="['/users/add']">
+      Setup new User
+    </button>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">First Name</th>
+          <th scope="col">Last Name</th>
+          <th scope="col">Company Name</th>
+          <th scope="col">Phone Number</th>
+          <th scope="col">Email</th>
+          <th scope="col">Id</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of usersList; let index = index">
+          <td>{{ user.firstName }}</td>
+          <td>{{ user.lastName }}</td>
+          <td>{{ user.companyName }}</td>
+          <td>{{ user.phone }}</td>
+          <td>{{ user.email }}</td>
+          <td>
+            <button type="button" class="btn btn-outline-primary" (click)="indexCopied = index" [ngClass]="{'btn-primary':(indexCopied == index),'btn-outline-primary':(indexCopied != index)}" ngxClipboard [cbContent]="user.userName">
+              {{ indexCopied == index ? 'Copied':'Copy' }}
+            </button>
+          </td>
+          <td>
+            <div class="btn-group" role="group" aria-label="Action">
+              <button type="button" class="btn btn-outline-primary"
+                [routerLink]="['/users/edit/',user.idCustomer]">Edit</button>
+              <button type="button" class="btn btn-outline-danger"
+                (click)="deleteUser(user?.idCustomer,index)">Delete</button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

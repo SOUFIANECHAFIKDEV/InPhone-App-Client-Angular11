@@ -1,0 +1,137 @@
+<carousel>
+    <slide>
+        <img [src]="customer?.logo1" alt="logo1" style="display: block; width: 100%;height: 300px;">
+    </slide>
+    <slide>
+        <img [src]="customer?.logo2" alt="logo2" style="display: block; width: 100%;height: 300px;">
+    </slide>
+    <slide>
+        <img [src]="customer?.logo3" alt="logo3" style="display: block; width: 100%;height: 300px;">
+    </slide>
+</carousel>
+
+
+<div class="container">
+    <table class="table">
+        <tbody>
+            <tr>
+                <td>
+                    <button type="button" class="btn btn-dark" ngxClipboard [cbContent]="qrCodeString" (click)="isUrlCopied = true">
+                        <ng-container *ngIf="isUrlCopied == false">
+                            COPY PASTE <br /> AND SHARE
+                        </ng-container>
+                        <ng-container *ngIf="isUrlCopied == true">
+                            URL <br /> COPIED
+                        </ng-container>
+                    </button>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-dark" (click)="openQrCodeModal(template)">
+                        SHARE VIA <br /> QR CODE
+                    </button>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-dark" [vcdDownloadVCard]="vCard"
+                        [encoding]="vCardEncoding.none">
+                        SAVE IN <br /> CONTACTS
+                    </button>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <button type="button" class="btn btn-dark">
+                        <a [href]="'tel:+'+customer?.phone">CALL MOBILE</a>
+                    </button>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-dark">
+                        <a [href]="'sms:'+customer?.phone">SEND SMS</a>
+                    </button>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-dark">
+                        <a [href]="'mailto:'+customer?.email">SEND EMAIL</a>
+                    </button>
+                </td>
+            </tr>
+
+            <tr *ngFor="let btns of buttons;">
+                    <td *ngFor="let btn of btns;">
+                        <!-- phone -->
+                        <button type="button" class="btn btn-dark" *ngIf="btn.type  ==  typeButtonEnum.Call">
+                            <a [href]="'tel:+'+ btn.content">{{btn.label}}</a>
+                        </button>
+
+                        <!-- email -->
+                        <button type="button" class="btn btn-dark" *ngIf="btn.type  ==  typeButtonEnum.SendEmail">
+                            <a [href]="'mailto:' + btn.content">{{btn.label}}</a>
+                        </button>
+
+                        <!-- sms -->
+                        <button type="button" class="btn btn-dark" *ngIf="btn.type  ==  typeButtonEnum.Text">
+                            <a [href]="'sms:'+btn.content">{{btn.label}}</a>
+                        </button>
+
+                        <!-- sms -->
+                        <button type="button" class="btn btn-dark" *ngIf="btn.type  ==  typeButtonEnum.WebLink">
+                            <a [href]="btn.content">{{btn.label}}</a>
+                        </button>
+                    </td>
+            </tr>
+
+        </tbody>
+    </table>
+
+    <!-- <div class="row">
+        <div class="col-sm-4">
+            <button type="button" class="btn btn-dark" ngxClipboard [cbContent]="qrCodeString">
+                3- COPY PASTE <br /> AND SHARE
+            </button>
+        </div>
+        <div class="col-sm-4">
+            <button type="button" class="btn btn-dark" (click)="openQrCodeModal(template)">
+                4- SHARE VIA <br /> QR CODE
+            </button>
+        </div>
+        <div class="col-sm-4">
+            <button type="button" class="btn btn-dark" [vcdDownloadVCard]="vCard" [encoding]="vCardEncoding.none">
+                5- SAVE IN <br /> CONTACTS
+            </button>
+        </div>
+    </div> -->
+
+    <!-- <div class="row">
+        <div class="col-sm-4">
+            <button type="button" class="btn btn-dark">
+                <a [href]="'tel:+'+customer?.phone">6-Call mobile</a>
+            </button>
+        </div>
+        <div class="col-sm-4">
+            <button type="button" class="btn btn-dark">
+                <a [href]="'sms:'+customer?.phone">7- Send SMS</a>
+            </button>
+        </div>
+        <div class="col-sm-4">
+            <button type="button" class="btn btn-dark">
+                <a [href]="'mailto:'+customer?.email">8 - Send Email</a>
+            </button>
+        </div>
+    </div> -->
+
+
+</div>
+
+<!-- QR code -->
+<ng-template #template>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left" style="text-align: center;width: 100%;">Share via QR Code</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body" style="text-align: center;">
+        <qrcode [qrdata]="qrCodeString" allowEmptyString="true" [width]="256" [errorCorrectionLevel]="'M'">
+        </qrcode>
+    </div>
+</ng-template>
